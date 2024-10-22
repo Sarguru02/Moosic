@@ -74,8 +74,6 @@ export default function StreamView({
 		// 'playVideo' is queue until the player is ready to received API calls and after 'loadVideoById' has been called.
 		player.playVideo();
 		function eventHandler(event: any) {
-			console.log(event);
-			console.log(event.data);
 			if (event.data === 0) {
 				playNext();
 			}
@@ -88,15 +86,26 @@ export default function StreamView({
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setLoading(true);
-		console.log("creatorId checking, ", creatorId, creatorId === "5cda7f54-169b-4b4d-a6da-bdd89b384929");
-		const res = await fetch("/api/streams/", {
-			method: "POST",
-			body: JSON.stringify({
-				creatorId,
-				url: inputLink
-			}),
-		});
-		setQueue([...queue, await res.json()])
+		try {
+			const res = await fetch("/api/streams/", {
+				method: "POST",
+				body: JSON.stringify({
+					creatorId,
+					url: inputLink
+				}),
+			});
+			setQueue([...queue, await res.json()])
+		}catch(e){
+			toast.error('Failed to add video. Please try again...', {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			})
+		}
 		setLoading(false);
 		setInputLink('')
 	}
@@ -228,7 +237,6 @@ export default function StreamView({
 												{playVideo ? <>
 													{/* @ts-ignore */}
 													<div ref={videoPlayerRef} className='w-full' />
-													{/* <iframe width={"100%"} height={300} src={`https://www.youtube.com/embed/${currentVideo.extractedId}?autoplay=1`} allow="autoplay"></iframe> */}
 												</> : <>
 													<img
 														src={currentVideo.bigImg}

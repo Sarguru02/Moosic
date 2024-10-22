@@ -1,21 +1,29 @@
-"use client"
-import 'react-toastify/dist/ReactToastify.css'
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+"use client";
 import StreamView from '@/components/StreamView';
-interface Video {
-	"id": string,
-	"type": string,
-	"url": string,
-	"extractedId": string,
-	"title": string,
-	"smallImg": string,
-	"bigImg": string,
-	"active": boolean,
-	"userId": string,
-	"upvotes": number,
-	"haveUpvoted": boolean
-}
-const creatorId = "5cda7f54-169b-4b4d-a6da-bdd89b384929"
+import { useEffect, useState } from 'react';
+
+
 export default function Component() {
-	return <StreamView creatorId={creatorId} playVideo={true} />
+	const [creatorId, setCreatorId] = useState<string | null>(null);
+	const [loading, setLoading] = useState(true);
+	useEffect(()=>{
+		const getUserData = async () => {
+			try {
+				const res = await fetch("/api/user");
+				const data = await res.json();
+				setCreatorId(data.user?.id||null);
+			} catch (e) {
+				console.error("Error fetching the data", e);
+			}finally{
+				setLoading(false);
+			}
+		}
+		getUserData();
+	}, []);
+	if(loading){
+		return <div> Loading... </div>
+	}
+
+	return <StreamView creatorId={creatorId} playVideo={true}/>
 }
+

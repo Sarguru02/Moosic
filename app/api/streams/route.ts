@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
 		const res = await youtubesearchapi.GetVideoDetails(extractedId);
 		const thumbnails = res.thumbnail.thumbnails;
 		thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1);
+
 		const stream = await prismaClient.stream.create({
 			data: {
 				userId: data.creatorId,
@@ -57,9 +58,10 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({ "message": "Unauthenticated" }, { status: 403 })
 	}
 
-	const streams = await prismaClient.stream.findMany({
+	const [streams, activeStream] = await Promise.all([prismaClient.stream.findMany({
 		where: {
-			userId: creatorId ?? ""
+			userId: creatorId ?? "", 
+			played: false
 		},
 		include: {
 			_count: {
@@ -73,12 +75,21 @@ export async function GET(req: NextRequest) {
 				}
 			}
 		},
-	});
+	}), prismaClient.currentStream.findFirst({
+		where: {
+			userId: creatorId
+		},
+		include: {
+			stream: true
+		}
+	})
+	])
 	return NextResponse.json({
 		streams: streams.map(({ _count, ...rest }) => ({
 			...rest,
 			upvotes: _count.upvotes,
 			haveUpvoted: rest.upvotes.length ? true : false
-		}))
+		})), 
+		activeStream
 	});
 }

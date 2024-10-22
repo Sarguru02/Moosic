@@ -26,25 +26,27 @@ enum Provider {
 }
 
 model Stream {
-  id          String     @id @default(uuid())
-  type        StreamType
-  active      Boolean    @default(true)
-  upvotes     Upvote[]
-  url         String
-  extractedId String
-  title       String
-  smallImg    String
-  bigImg      String
-  userId      String
-  user        User       @relation(fields: [userId], references: [id])
-	currentStream CurrentStream?
+  id            String         @id @default(uuid())
+  type          StreamType
+  active        Boolean        @default(true)
+  played        Boolean        @default(false)
+  playedTs      DateTime?
+  createdAt     DateTime       @default(now())
+  upvotes       Upvote[]
+  url           String
+  extractedId   String
+  title         String
+  smallImg      String
+  bigImg        String
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  currentStream CurrentStream?
 }
 
-
-model CurrentStream{
-	userId		String	@id
-	streamId	String  @unique
-	stream		Stream? @relation(fields: [streamId], references: [id])
+model CurrentStream {
+  userId   String  @id
+  streamId String  @unique
+  stream   Stream? @relation(fields: [streamId], references: [id])
 }
 
 enum StreamType {
@@ -57,7 +59,7 @@ model Upvote {
   userId   String
   streamId String
   user     User   @relation(fields: [userId], references: [id])
-  stream   Stream @relation(fields: [streamId], references: [id])
+  stream   Stream @relation(fields: [streamId], references: [id], onDelete: Cascade)
 
   @@unique([userId, streamId])
 }
