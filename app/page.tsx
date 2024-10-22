@@ -1,101 +1,153 @@
-import Image from "next/image";
+import AppBar from "@/components/AppBar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Music, Radio, Star, Users } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import Redirect from "@/components/Redirect";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	return (
+		<div>
+			<AppBar />
+			<Redirect />
+			<div className="flex flex-col min-h-screen bg-gray-900">
+				<main className="flex-1">
+					<section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-blue-900">
+						<div className="container mx-auto px-4 md:px-6">
+							<div className="flex flex-col items-center space-y-4 text-center">
+								<div className="space-y-2">
+									<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-blue-100">
+										Let Your Fans Choose the Soundtrack to Your Stream
+									</h1>
+									<p className="mx-auto max-w-[700px] text-blue-200 md:text-xl">
+										Moosic revolutionizes music streaming by putting the power in your fans' hands. Create unforgettable
+										streams with a personalized playlist curated by your audience.
+									</p>
+								</div>
+								<div className="space-x-4">
+									<Button className="bg-blue-400 text-blue-900 hover:bg-blue-300">Get Started</Button>
+									<Button variant="outline" className="bg-transparent text-blue-300 hover:bg-blue-800 border-2 border-blue-400">Learn More</Button>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-900">
+						<div className="container mx-auto px-4 md:px-6">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-blue-100">Features</h2>
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col items-center space-y-4 p-6">
+										<Users className="h-12 w-12 text-blue-400" />
+										<h3 className="text-xl font-bold text-blue-100">Fan Interaction</h3>
+										<p className="text-center text-blue-200">Engage your audience by letting them choose the music.</p>
+									</CardContent>
+								</Card>
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col items-center space-y-4 p-6">
+										<Radio className="h-12 w-12 text-blue-400" />
+										<h3 className="text-xl font-bold text-blue-100">Live Streaming</h3>
+										<p className="text-center text-blue-200">Seamlessly integrate with popular streaming platforms.</p>
+									</CardContent>
+								</Card>
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col items-center space-y-4 p-6">
+										<Music className="h-12 w-12 text-blue-400" />
+										<h3 className="text-xl font-bold text-blue-100">Vast Music Library</h3>
+										<p className="text-center text-blue-200">Access millions of tracks from various genres.</p>
+									</CardContent>
+								</Card>
+							</div>
+						</div>
+					</section>
+					<section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32 bg-blue-900">
+						<div className="container mx-auto px-4 md:px-6">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-blue-100">How It Works</h2>
+							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+								<div className="flex flex-col items-center space-y-4">
+									<div className="bg-blue-400 text-blue-900 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">1</div>
+									<h3 className="text-xl font-bold text-blue-100">Create Your Stream</h3>
+									<p className="text-center text-blue-200">Set up your stream and connect to your favorite platform.</p>
+								</div>
+								<div className="flex flex-col items-center space-y-4">
+									<div className="bg-blue-400 text-blue-900 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">2</div>
+									<h3 className="text-xl font-bold text-blue-100">Invite Your Fans</h3>
+									<p className="text-center text-blue-200">Share your unique Moosic link with your audience.</p>
+								</div>
+								<div className="flex flex-col items-center space-y-4">
+									<div className="bg-blue-400 text-blue-900 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">3</div>
+									<h3 className="text-xl font-bold text-blue-100">Let Them Choose</h3>
+									<p className="text-center text-blue-200">Fans vote on songs, and the most popular tracks play on your stream.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 bg-gray-900">
+						<div className="container mx-auto px-4 md:px-6">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-blue-100">What Streamers Say</h2>
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col space-y-4 p-6">
+										<Star className="h-6 w-6 text-yellow-400" />
+										<p className="text-blue-200">"Moosic has transformed my streams. My audience loves being part of the music selection!"</p>
+										<p className="font-bold text-blue-100">- Alex, Gaming Streamer</p>
+									</CardContent>
+								</Card>
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col space-y-4 p-6">
+										<Star className="h-6 w-6 text-yellow-400" />
+										<p className="text-blue-200">"The engagement on my channel has skyrocketed since I started using Moosic. It's a game-changer!"</p>
+										<p className="font-bold text-blue-100">- Sarah, Art Streamer</p>
+									</CardContent>
+								</Card>
+								<Card className="bg-gray-800">
+									<CardContent className="flex flex-col space-y-4 p-6">
+										<Star className="h-6 w-6 text-yellow-400" />
+										<p className="text-blue-200">"I love how Moosic brings my community together. It's not just about the music, it's about the shared experience."</p>
+										<p className="font-bold text-blue-100">- Mike, Talk Show Host</p>
+									</CardContent>
+								</Card>
+							</div>
+						</div>
+					</section>
+					<section className="w-full py-12 md:py-24 lg:py-32 bg-blue-900">
+						<div className="container mx-auto px-4 md:px-6">
+							<div className="flex flex-col items-center space-y-4 text-center">
+								<div className="space-y-2">
+									<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-blue-100">
+										Ready to Revolutionize Your Streams?
+									</h2>
+									<p className="mx-auto max-w-[600px] text-blue-200 md:text-xl">
+										Join Moosic today and start creating unforgettable streaming experiences with your fans.
+									</p>
+								</div>
+								<div className="w-full max-w-sm space-y-2">
+									<form className="flex space-x-2">
+										<Input className="flex-1 bg-gray-800 text-blue-100 placeholder-blue-300" placeholder="Enter your email" type="email" />
+										<Button className="bg-blue-400 text-blue-900 hover:bg-blue-300">Sign Up</Button>
+									</form>
+									<p className="text-xs text-blue-200">
+										By signing up, you agree to our Terms of Service and Privacy Policy.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</main>
+				<footer className="py-6 w-full shrink-0 px-4 md:px-6 border-t border-gray-800">
+					<div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+						<p className="text-xs text-blue-300">© 2024 Moosic. All rights reserved.</p>
+						<nav className="flex gap-4 sm:gap-6 mt-4 sm:mt-0">
+							<Link className="text-xs hover:underline underline-offset-4 text-blue-300" href="#">
+								Terms of Service
+							</Link>
+							<Link className="text-xs hover:underline underline-offset-4 text-blue-300" href="#">
+								Privacy
+							</Link>
+						</nav>
+					</div>
+				</footer>
+			</div>
+		</div>
+	);
 }
